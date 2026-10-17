@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portafolio de Facundo Lapente. Sistemas de gestión y automatización de procesos con inteligencia artificial, desarrollados con Claude y en uso real.">
+<meta property="og:title" content="Portafolio Facundo Lapente">
+<meta property="og:description" content="Portafolio de Facundo Lapente. Sistemas de gestión y automatización de procesos con inteligencia artificial, desarrollados con Claude y en uso real.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://facundolapente-blip.github.io/">
+<title>Portafolio Facundo Lapente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap">
+<script>(()=>{let l="es";try{l=localStorage.getItem("pf-lang")||l}catch(_){}const h=location.hash.slice(1);if(h==="en"||h==="es")l=h;const r=document.documentElement;r.dataset.opt="b";r.dataset.lang=l;r.lang=l})();</script>
+<style>
+/* Layout: columna central de 1200px; cada proyecto = cabecera, resumen ejecutivo, composición compu+celular, texto con ficha lateral y galería.
+   Tres opciones de diseño neutras sobre el mismo HTML: A Grafito (claro), B Informe (reporte ejecutivo), C Carbón (oscuro). */
+:root {
+  /* A · Grafito, claro */
+  --bg: #f2f2f0; --surface: #ffffff; --sunk: #e9e9e6; --ink: #161616; --muted: #66665f; --line: #dcdcd7;
+  --accent: #161616; --on-accent: #ffffff; --frame: #e4e4e0;
+  --dot-arcano: #8f7358; --dot-sb: #5d8473; --dot-hm: #6470ad;
+  --shadow: 0 1px 2px rgb(20 20 20 / .05), 0 18px 40px -18px rgb(20 20 20 / .28);
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --d-weight: 820; --d-wdth: 116; --d-track: -.035em; --d-lh: .98;
+  --r: 12px; --r-lg: 18px; --rule: 1px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #1b1b1a; --sunk: #232322; --ink: #ecebe7; --muted: #9f9e98; --line: #2e2e2c;
+    --accent: #ecebe7; --on-accent: #121212; --frame: #262625;
+    --dot-arcano: #c3a283; --dot-sb: #8fbca9; --dot-hm: #9aa5e0;
+    --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 18px 40px -16px rgb(0 0 0 / .8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #1b1b1a; --sunk: #232322; --ink: #ecebe7; --muted: #9f9e98; --line: #2e2e2c;
+  --accent: #ecebe7; --on-accent: #121212; --frame: #262625;
+  --dot-arcano: #c3a283; --dot-sb: #8fbca9; --dot-hm: #9aa5e0;
+  --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 18px 40px -16px rgb(0 0 0 / .8);
+  color-scheme: dark;
+}
+/* B · Informe */
+:root[data-opt="b"] {
+  --bg: #ffffff; --surface: #f7f7f5; --sunk: #efefec; --ink: #1c1e21; --muted: #5d6168; --line: #d9dadd;
+  --accent: #2f3b47; --on-accent: #ffffff; --frame: #eceded;
+  --dot-arcano: #8a6d52; --dot-sb: #4f7a68; --dot-hm: #56619c;
+  --shadow: none;
+  --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --f-body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --d-weight: 500; --d-wdth: 100; --d-track: -.015em; --d-lh: 1.02;
+  --r: 3px; --r-lg: 4px; --rule: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-opt="b"]:not([data-theme="light"]) {
+    --bg: #15171a; --surface: #1c1f23; --sunk: #23272c; --ink: #e8e9eb; --muted: #9ba1a9; --line: #30343a;
+    --accent: #b9c6d3; --on-accent: #15171a; --frame: #262a30;
+    --dot-arcano: #c8a98b; --dot-sb: #8dbba7; --dot-hm: #a2abe0;
+    color-scheme: dark;
+  }
+}
+:root[data-opt="b"][data-theme="dark"] {
+  --bg: #15171a; --surface: #1c1f23; --sunk: #23272c; --ink: #e8e9eb; --muted: #9ba1a9; --line: #30343a;
+  --accent: #b9c6d3; --on-accent: #15171a; --frame: #262a30;
+  --dot-arcano: #c8a98b; --dot-sb: #8dbba7; --dot-hm: #a2abe0;
+  color-scheme: dark;
+}
+/* C · Carbón: oscuro a propósito, en cualquier tema */
+:root[data-opt="c"] {
+  --bg: #141413; --surface: #1c1c1a; --sunk: #242422; --ink: #edebe6; --muted: #9b9891; --line: #2d2c29;
+  --accent: #d9d3c7; --on-accent: #141413; --frame: #252523;
+  --dot-arcano: #c8a684; --dot-sb: #92bfab; --dot-hm: #a0aae2;
+  --shadow: 0 1px 0 rgb(255 255 255 / .04) inset, 0 24px 48px -20px rgb(0 0 0 / .9);
+  --f-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --d-weight: 800; --d-wdth: 100; --d-track: -.04em; --d-lh: .96;
+  --r: 14px; --r-lg: 22px; --rule: 1px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 16.5px/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  transition: background-color .25s, color .25s;
+}
+:root[data-lang="es"] .lang-block[data-l="en"], :root[data-lang="en"] .lang-block[data-l="es"] { display: none; }
+.wrap { max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
+@media (max-width: 600px) { .wrap { padding-inline: 16px; } body { font-size: 16px; } }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+h1, h2 { font-family: var(--f-display); font-weight: var(--d-weight); font-variation-settings: "wdth" var(--d-wdth); letter-spacing: var(--d-track); line-height: var(--d-lh); }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.mono { font: 400 12.5px var(--f-mono); letter-spacing: .03em; }
+.label { font: 500 11.5px/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.row-between { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+[data-p="arcano"] { --dot: var(--dot-arcano); }
+[data-p="sb"] { --dot: var(--dot-sb); }
+[data-p="hm"] { --dot: var(--dot-hm); }
+[data-p="gastro"] { --dot: #b0583f; }
+
+/* ---------- Encabezado ---------- */
+.hero { padding-block: 48px 64px; }
+.hero h1 { font-size: clamp(48px, 9vw, 128px); margin-top: 36px; }
+.role { font-family: var(--f-display); font-size: clamp(22px, 3.2vw, 40px); line-height: 1.12; color: var(--muted); margin-top: 10px; letter-spacing: -.01em; font-variation-settings: "wdth" 75; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 56px; margin-top: 44px; }
+.intro p { font-size: 18.5px; line-height: 1.6; max-width: 62ch; }
+.intro p + p { margin-top: 14px; }
+.skills { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.skills li { font-size: 13.5px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.index ol { list-style: none; padding: 0; margin: 12px 0 0; border-top: var(--rule) solid var(--ink); }
+.index a { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.index a:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--dot); }
+.index strong { font-weight: 600; }
+.index small { font: 400 11.5px var(--f-mono); color: var(--muted); text-align: right; }
+.kpis { margin: 56px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.kpis div { padding: 22px 20px 22px 0; display: flex; flex-direction: column-reverse; gap: 4px; }
+.kpis div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.kpis dd { margin: 0; font-family: var(--f-display); font-weight: var(--d-weight); font-variation-settings: "wdth" var(--d-wdth); font-size: clamp(34px, 4.4vw, 56px); line-height: 1; letter-spacing: var(--d-track); font-variant-numeric: tabular-nums; }
+.kpis dt { font-size: 13.5px; color: var(--muted); line-height: 1.35; }
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpis div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .kpis div:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+
+/* ---------- Método ---------- */
+.method { padding-block: 72px; border-top: 1px solid var(--line); }
+.method h2, .bring h2 { font-size: clamp(34px, 5vw, 64px); margin-top: 14px; }
+.method .lede { font-size: clamp(18px, 2vw, 22px); line-height: 1.45; max-width: 52ch; margin-top: 16px; color: var(--muted); }
+.method-steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.method-steps li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px 18px 22px; display: flex; flex-direction: column; gap: 10px; }
+.method-steps .n { font: 500 12px var(--f-mono); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); }
+.method-steps h3 { font-size: 17px; font-weight: 650; line-height: 1.25; }
+.method-steps p { font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 1080px) { .method-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .method-steps { grid-template-columns: minmax(0, 1fr); } }
+.tools { margin-top: 36px; }
+.tools dl { margin: 12px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: var(--rule) solid var(--ink); }
+.tools dl div { padding: 16px 18px 6px 0; }
+.tools dl div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+.tools dt { font-weight: 650; font-size: 16px; }
+.tools dd { margin: 4px 0 0; font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+@media (max-width: 880px) {
+  .tools dl { grid-template-columns: minmax(0, 1fr); }
+  .tools dl div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ---------- Proyecto ---------- */
+.project { padding-block: 72px 24px; border-top: 1px solid var(--line); }
+.eyebrow { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 8px; font: 500 11.5px var(--f-mono); letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; background: var(--ink); color: var(--bg); }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot); }
+.project h2 { font-size: clamp(40px, 6.4vw, 84px); margin-top: 20px; }
+.project .lede { font-size: clamp(19px, 2.1vw, 24px); line-height: 1.42; max-width: 44ch; margin-top: 16px; }
+.links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.links a, .links span { font: 400 13px var(--f-mono); padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; background: var(--surface); color: var(--muted); }
+.links a { color: var(--ink); }
+.links a:hover { border-color: var(--ink); }
+
+.summary { margin: 44px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.summary div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 18px 20px; }
+.summary dt { font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.summary dt::before { content: ""; width: 14px; height: 2px; background: var(--dot); }
+.summary dd { margin: 10px 0 0; font-size: 15.5px; line-height: 1.5; }
+@media (max-width: 980px) { .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .summary { grid-template-columns: minmax(0, 1fr); } }
+.lead-note { margin-top: 20px; padding: 16px 20px; border-radius: var(--r); background: var(--sunk); font-size: 15.5px; line-height: 1.55; max-width: 92ch; }
+
+figure { margin: 0; min-width: 0; }
+.browser { border-radius: var(--r); overflow: hidden; background: var(--frame); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.browser .bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; }
+.browser .bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.browser .bar em { font: normal 11px var(--f-mono); color: var(--muted); margin-left: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shot { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.shot img { display: block; width: 100%; height: auto; }
+.phone { border-radius: 30px; padding: 6px; background: #0c0c0c; box-shadow: 0 0 0 1px rgb(255 255 255 / .08) inset, 0 20px 40px -16px rgb(0 0 0 / .55); }
+.phone .shot img { border-radius: 24px; }
+figcaption { margin-top: 12px; font-size: 14.5px; line-height: 1.5; color: var(--muted); max-width: 72ch; }
+figcaption b { color: var(--ink); font-weight: 650; }
+
+.comp { margin-top: 44px; }
+.comp-stage { position: relative; padding: 0 11% 7% 0; }
+.comp-stage .phone { position: absolute; right: 0; bottom: 0; width: 22%; }
+@media (max-width: 640px) { .comp-stage { padding: 0 16% 12% 0; } .comp-stage .phone { width: 30%; border-radius: 18px; padding: 4px; } .comp-stage .phone .shot img { border-radius: 14px; } }
+
+.body { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; margin-top: 48px; }
+.decisions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 700px) { .decisions { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 940px) { .body { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+.prose section + section { margin-top: 40px; }
+.prose h3 { font: 500 12px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: var(--rule) solid var(--ink); }
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; counter-increment: s; line-height: 1.55; }
+.steps li::before { content: counter(s); font: 500 12px var(--f-mono); width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; margin-top: 1px; }
+.steps b { font-weight: 650; }
+.decisions { display: grid; gap: 12px; }
+.decision { padding: 18px 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--dot); }
+.decision h4 { font-size: 16.5px; font-weight: 650; line-height: 1.3; }
+.decision p { margin-top: 6px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.feats { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
+.feats li { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.feats li b { display: block; color: var(--ink); font-weight: 650; margin-bottom: 2px; }
+@media (max-width: 600px) { .feats { grid-template-columns: minmax(0, 1fr); } }
+.facts { align-self: start; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; }
+@media (max-width: 940px) { .facts { position: static; } }
+.facts dl { margin: 0; display: grid; gap: 18px; }
+.facts dt { font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 4px 0 0; font-size: 14.5px; line-height: 1.45; }
+.facts .big { font-family: var(--f-display); font-weight: var(--d-weight); font-variation-settings: "wdth" var(--d-wdth); font-size: 34px; line-height: 1; letter-spacing: var(--d-track); font-variant-numeric: tabular-nums; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px !important; }
+.tags span { font: 400 11.5px var(--f-mono); padding: 4px 8px; border-radius: 6px; background: var(--sunk); }
+
+.gallery { margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; }
+.gallery figcaption { font-size: 13.5px; }
+@media (max-width: 760px) { .gallery { grid-template-columns: minmax(0, 1fr); } }
+.phones { margin-top: 56px; padding: 28px 36px 36px; border-radius: var(--r-lg); background: var(--sunk); }
+.phones-row { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 220px)); gap: 28px; margin-top: 18px; justify-content: center; }
+.phones figcaption { text-align: center; font-size: 13.5px; }
+@media (max-width: 640px) { .phones { padding: 20px 16px 24px; } .phones-row { gap: 12px; } }
+.note { margin-top: 24px; font-size: 13.5px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
+.note::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 2px; background: var(--dot); }
+
+/* ---------- Cierre ---------- */
+.bring { padding-block: 80px; border-top: 1px solid var(--line); }
+.bring-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 36px; }
+.bring-grid div { border-top: var(--rule) solid var(--ink); padding-top: 16px; }
+.bring-grid h3 { font-size: 20px; font-weight: 650; line-height: 1.25; margin-bottom: 8px; }
+.bring-grid p { color: var(--muted); font-size: 15.5px; }
+@media (max-width: 820px) { .bring-grid { grid-template-columns: minmax(0, 1fr); } }
+.foot { padding-block: 28px 110px; border-top: 1px solid var(--line); color: var(--muted); }
+
+/* ---------- Opción B: informe ejecutivo ---------- */
+:root[data-opt="b"] .hero h1 { font-size: clamp(52px, 8vw, 112px); }
+:root[data-opt="b"] .role { font-family: var(--f-body); font-variation-settings: normal; font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; letter-spacing: 0; }
+:root[data-opt="b"] .chip { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+:root[data-opt="b"] .skills li { border-radius: 2px; background: transparent; }
+:root[data-opt="b"] .summary { gap: 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+:root[data-opt="b"] .summary div { background: transparent; border: 0; border-radius: 0; padding: 18px 20px 20px 0; }
+:root[data-opt="b"] .summary div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+@media (max-width: 980px) { :root[data-opt="b"] .summary div:nth-child(3) { padding-left: 0; border-left: 0; } :root[data-opt="b"] .summary div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+@media (max-width: 560px) { :root[data-opt="b"] .summary div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+:root[data-opt="b"] .method-steps { gap: 0; border-top: 2px solid var(--ink); }
+:root[data-opt="b"] .method-steps li { background: transparent; border: 0; border-radius: 0; padding: 20px 18px 8px 0; }
+:root[data-opt="b"] .method-steps li + li { padding-left: 18px; border-left: 1px solid var(--line); }
+@media (max-width: 1080px) { :root[data-opt="b"] .method-steps li + li { border-left: 0; padding-left: 0; } :root[data-opt="b"] .method-steps li { border-bottom: 1px solid var(--line); padding-right: 18px; } }
+:root[data-opt="b"] .method-steps .n { background: transparent; color: var(--ink); border: 1px solid var(--ink); border-radius: 0; }
+:root[data-opt="b"] .decision { background: transparent; border: 0; border-left: 2px solid var(--ink); border-radius: 0; padding: 4px 0 4px 18px; }
+:root[data-opt="b"] .lead-note { background: transparent; border-left: 2px solid var(--accent); border-radius: 0; font-family: var(--f-display); font-size: 20px; line-height: 1.45; padding: 4px 0 4px 20px; }
+:root[data-opt="b"] .facts { border-radius: 0; background: transparent; border: 0; border-top: 2px solid var(--ink); padding: 18px 0 0; }
+:root[data-opt="b"] .phones { background: var(--surface); border: 1px solid var(--line); }
+:root[data-opt="b"] .kpis { border-top: 2px solid var(--ink); }
+.side { display: none; }
+@media (min-width: 1360px) {
+  :root[data-opt="b"] .lang-block { padding-left: 200px; }
+  :root[data-opt="b"] .side { display: block; position: fixed; left: 32px; top: calc(env(safe-area-inset-top, 0px) + 40px); width: 170px; }
+  :root[data-opt="b"] .side ol { list-style: none; margin: 14px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+  :root[data-opt="b"] .side a { display: block; padding: 9px 0; font-size: 13.5px; text-decoration: none; border-bottom: 1px solid var(--line); color: var(--muted); }
+  :root[data-opt="b"] .side a:hover { color: var(--ink); }
+}
+
+/* ---------- Opción C: carbón ---------- */
+:root[data-opt="c"] .hero { background: radial-gradient(1200px 500px at 85% -10%, rgb(217 211 199 / .09), transparent 70%); max-width: none; }
+:root[data-opt="c"] .hero > * { max-width: 1152px; margin-inline: auto; }
+:root[data-opt="c"] .role { font-variation-settings: normal; font-weight: 500; letter-spacing: -.02em; }
+:root[data-opt="c"] .chip { background: var(--sunk); color: var(--ink); border: 1px solid var(--line); }
+:root[data-opt="c"] .project h2 { font-size: clamp(42px, 7vw, 96px); }
+:root[data-opt="c"] .comp-stage { padding: 28px 13% 8% 28px; border-radius: var(--r-lg); background: linear-gradient(160deg, var(--sunk), var(--surface)); border: 1px solid var(--line); }
+:root[data-opt="c"] .comp-stage .phone { right: 28px; bottom: 28px; }
+@media (max-width: 640px) { :root[data-opt="c"] .comp-stage { padding: 14px 18% 14% 14px; } :root[data-opt="c"] .comp-stage .phone { right: 12px; bottom: 12px; } }
+:root[data-opt="c"] .kpis dd { color: var(--accent); }
+
+/* ---------- Controles ---------- */
+.controls { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); z-index: 40; display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgb(22 22 22 / .9); backdrop-filter: blur(10px); box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5); max-width: calc(100vw - 24px); overflow-x: auto; }
+.seg { display: flex; gap: 2px; align-items: center; }
+.seg + .seg { padding-left: 8px; border-left: 1px solid rgb(255 255 255 / .18); }
+.seg-label { font: 500 11px "Lexend", Arial, sans-serif; color: #9e9c96; padding: 0 8px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.seg button { font: 500 13px "Lexend", Arial, sans-serif; color: #e9e8e3; background: transparent; border: 0; border-radius: 999px; padding: 8px 13px; cursor: pointer; white-space: nowrap; }
+.seg button:hover { background: rgb(255 255 255 / .1); }
+.seg button[aria-pressed="true"] { background: #f2f2f0; color: #161616; }
+@media (max-width: 560px) { .seg-label { display: none; } .seg button { padding: 8px 10px; font-size: 12.5px; } }
+
+/* ---------- Visor ---------- */
+.viewer { position: fixed; inset: 0; z-index: 60; background: rgb(8 8 8 / .94); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 14px); }
+.viewer-top { display: flex; justify-content: flex-end; gap: 8px; }
+.viewer button { font: 500 13px "Lexend", Arial, sans-serif; color: #f1f0ec; background: rgb(255 255 255 / .1); border: 1px solid rgb(255 255 255 / .2); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.viewer button:hover { background: rgb(255 255 255 / .2); }
+.viewer-stage { overflow: auto; display: grid; place-items: center; min-height: 0; padding-block: 10px; }
+.viewer-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; cursor: zoom-in; }
+.viewer-stage.zoom { place-items: start center; }
+.viewer-stage.zoom img { max-height: none; cursor: zoom-out; }
+.viewer-cap { color: #cfcdc7; font-size: 14px; text-align: center; max-width: 80ch; margin-inline: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .shot img { transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+  .browser:hover .shot img { transform: scale(1.008); }
+}
+@media (prefers-reduced-motion: reduce) { body { transition: none; } }
+
+/* ---------- PDF ---------- */
+@media print {
+  @page { size: A4; margin: 12mm 12mm 14mm; }
+  body { font-size: 10pt; transition: none; }
+  .controls, .viewer, .side { display: none !important; }
+  :root[data-opt="b"] .lang-block { padding-left: 0; }
+  .wrap { max-width: none; padding-inline: 0; }
+  .hero { padding-block: 0 10px; }
+  .hero h1 { font-size: 52pt; margin-top: 18px; }
+  .role { font-size: 19pt; }
+  .hero-grid { gap: 22pt; margin-top: 22px; }
+  .intro p { font-size: 10.5pt; }
+  .skills li { font-size: 8.5pt; padding: 3px 8px; }
+  .kpis { margin-top: 26px; }
+  .kpis dd { font-size: 26pt; }
+  .kpis dt { font-size: 8.5pt; }
+  .method { break-before: page; padding-block: 0; border: 0; }
+  .method h2, .bring h2 { font-size: 30pt; }
+  .method .lede { font-size: 12pt; }
+  .method-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+  .method-steps li { padding: 12px 14px; break-inside: avoid; }
+  .method-steps p, .tools dd { font-size: 9pt; }
+  .method-steps h3 { font-size: 11pt; }
+  .tools dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tools dl div { break-inside: avoid; }
+  .tools dl div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .project { break-before: page; padding-block: 0; border: 0; }
+  .project h2 { font-size: 32pt; margin-top: 10px; }
+  .project .lede { font-size: 12.5pt; }
+  .summary { margin-top: 18px; gap: 8px; }
+  .summary div { padding: 10px 12px; }
+  .summary dd { font-size: 9pt; }
+  .lead-note { font-size: 9.5pt; padding: 10px 14px; margin-top: 12px; }
+  :root[data-opt="b"] .lead-note { font-size: 11pt; }
+  .comp { margin-top: 18px; break-inside: avoid; }
+  .body { grid-template-columns: minmax(0, 1fr) 150pt; gap: 16pt; margin-top: 0; break-before: page; }
+  .summary { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  :root[data-opt="b"] .summary div:nth-child(n) { border-top: 0; padding-left: 10px; border-left: 1px solid var(--line); }
+  :root[data-opt="b"] .summary div:first-child { padding-left: 0; border-left: 0; }
+  .comp-stage { padding: 0 9% 6% 0; width: 84%; }
+  .bring-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 16px; margin-top: 16px; }
+  .bring-grid h3 { font-size: 11pt; }
+  .bring-grid p { font-size: 9pt; }
+  .bring h2 { font-size: 22pt; }
+  .prose section + section { margin-top: 16px; }
+  .prose p, .steps li, .decision p, .feats li { font-size: 9pt; line-height: 1.45; }
+  .decision { padding: 10px 14px; break-inside: avoid; }
+  .decision h4 { font-size: 10.5pt; }
+  .steps { gap: 8px; }
+  .feats { gap: 10px 18px; }
+  .facts { position: static; padding: 14px; }
+  .facts .big { font-size: 22pt; }
+  .gallery { margin-top: 18px; gap: 12px; }
+  .gallery figure, .phones { break-inside: avoid; }
+  figcaption { font-size: 8.5pt; margin-top: 6px; }
+  .phones { margin-top: 16px; padding: 14px; }
+  .phones-row { grid-template-columns: repeat(var(--n), minmax(0, 130pt)); }
+  .bring { break-before: avoid; break-inside: avoid; padding-block: 28px 0; }
+  .foot { padding-block: 16px 0; }
+  .browser, .phone, .comp-stage { box-shadow: none !important; }
+}
+
+/* ---------- Edición y comentarios ---------- */
+.seg button.primary { background: #f2f2f0; color: #161616; }
+.seg button.primary:hover { background: #ffffff; }
+.seg button:disabled { opacity: .5; cursor: progress; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 70px); z-index: 41; margin: 0; max-width: min(520px, calc(100vw - 32px)); padding: 10px 16px; border-radius: 10px; background: #161616; color: #f2f2f0; font: 500 13.5px/1.45 "Lexend", Arial, sans-serif; text-align: center; box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5); }
+.editing [contenteditable] { outline: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 3px; border-radius: 2px; cursor: text; }
+.editing [contenteditable]:hover { outline-color: var(--accent); }
+.editing [contenteditable]:focus { outline: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.editing .shot { cursor: default; }
+.picking .lang-block * { cursor: crosshair !important; }
+.picking .lang-block :is([data-k], figure, .decision):hover { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media print { .toast { display: none !important; } }
+
+/* ---------- Contacto ---------- */
+.contact { padding-block: 0 56px; }
+.contact ul { list-style: none; margin: 12px 0 0; padding: 14px 0 0; display: flex; flex-wrap: wrap; gap: 10px 32px; border-top: var(--rule) solid var(--ink); font-size: 17px; }
+.contact a { text-decoration: none; border-bottom: 1px solid var(--line); }
+.contact a:hover { border-bottom-color: var(--ink); }
+@media print { .contact { padding-block: 16px 0; break-inside: avoid; } .contact ul { font-size: 10.5pt; } }
+@media print {
+  .bring { padding-block: 14px 0; }
+  .bring h2 { font-size: 18pt; margin-top: 6px; }
+  .bring-grid { margin-top: 10px; gap: 12px; }
+  .bring-grid div { padding-top: 8px; }
+  .bring-grid h3 { font-size: 10pt; margin-bottom: 4px; }
+  .bring-grid p { font-size: 8.5pt; line-height: 1.4; }
+  .contact { padding-block: 12px 0; }
+  .contact ul { margin-top: 6px; padding-top: 8px; font-size: 9.5pt; }
+  .foot { display: none; }
+}
+
+/* ---------- Proyecto adicional ---------- */
+.bonus .summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.bonus .comp-stage { padding: 0; }
+@media (max-width: 980px) { .bonus .summary { grid-template-columns: minmax(0, 1fr); } :root[data-opt="b"] .bonus .summary div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+@media print {
+  .bonus h2 { font-size: 26pt; }
+  .bonus .lede { font-size: 11pt; margin-top: 8px; }
+  .bonus .links { margin-top: 10px; }
+  .bonus .links a, .bonus .links span { font-size: 8pt; padding: 3px 9px; }
+  .bonus .summary { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; margin-top: 12px; }
+  .bonus .summary dd { font-size: 8.5pt; }
+  .bonus .comp { margin-top: 12px; }
+  .bonus .comp-stage { width: 72%; padding: 0; }
+  .bonus figcaption { font-size: 8.5pt !important; line-height: 1.4; }
+  .bonus .gallery { gap: 10px; }
+  .bonus .gallery { margin-top: 12px; }
+}
+
+/* ---------- Cómo trabajo ---------- */
+.how .bring-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 980px) { .how .bring-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .how .bring-grid { grid-template-columns: minmax(0, 1fr); } }
+@media print { .how .bring-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } .how { break-before: avoid; } }
+@media print {
+  .hero h1 { font-size: 40pt; margin-top: 10px; }
+  .role { font-size: 15pt; }
+  .hero-grid { gap: 16pt; margin-top: 14px; }
+  .intro p { font-size: 9.5pt; }
+  .index li a { padding-block: 4px; }
+  .bring { padding-block: 10px 0; }
+  .how { break-inside: avoid; }
+  .how .bring-grid { gap: 10px; }
+  .bonus .comp-stage { width: 64%; }
+}
+
+/* ---------- Tipografía del CV (Lexend) ---------- */
+:root, :root[data-opt="b"] {
+  --f-display: "Lexend", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Lexend", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Lexend", "Helvetica Neue", Arial, sans-serif;
+  --d-weight: 600; --d-track: -.02em;
+}
+/* Lexend ocupa más: ajuste de tamaños para el PDF */
+@media print {
+  body { font-size: 9pt; }
+  .hero h1 { font-size: 34pt; }
+  .role { font-size: 13pt; }
+  .intro p { font-size: 8.6pt; }
+  .skills li { font-size: 7.6pt; }
+  .index strong { font-size: 9pt; }
+  .bring h2 { font-size: 15pt; }
+  .bring-grid h3 { font-size: 9pt; }
+  .bring-grid p { font-size: 7.6pt; line-height: 1.4; }
+  .project h2 { font-size: 26pt; }
+  .project .lede { font-size: 11pt; }
+  .summary dd { font-size: 8.2pt; }
+  :root[data-opt="b"] .lead-note { font-size: 9.5pt; }
+  .prose p, .decision p { font-size: 8.2pt; }
+  .decision h4 { font-size: 9.5pt; }
+  .facts dd { font-size: 8.5pt; }
+  .facts .big { font-size: 19pt; }
+  figcaption { font-size: 7.8pt; }
+  .comp-stage { width: 76%; }
+  .bonus .comp-stage { width: 60%; }
+  .bonus .summary dd { font-size: 7.8pt; }
+  .bonus .lede { font-size: 10pt; }
+  .note { font-size: 8pt; }
+}
+
+</style>
+</head>
+<body>
+<div class="lang-block" data-l="es" lang="es"><nav class="side" aria-label="Proyectos"><p class="label">Facundo Lapente</p><ol><li><a href="#arcano-es">Arcano Record Store</a></li><li><a href="#stock-es">Arcano · Stock y gestión</a></li><li><a href="#house-mates-es">House Mates · Panel</a></li><li><a href="#second-brain-es">Second Brain</a></li><li><a href="#landing-es">Landing para una gastroenteróloga</a></li></ol></nav>
+<header class="hero wrap">
+<div class="row-between"><span class="label">Portafolio · 2026</span><span class="label">Montevideo, Uruguay</span></div>
+<h1>Facundo Lapente</h1><p class="role">Gestión de negocios, producto y desarrollo con inteligencia artificial</p>
+<div class="hero-grid"><div class="intro"><p>Desarrollo herramientas digitales orientadas a la gestión de negocios. Los cuatro proyectos de este portafolio se encuentran actualmente en uso. Se trata de la tienda online de mi disquería, el sistema con el que la administro, el panel de contabilidad de mi productora de eventos, que gestiono junto a dos socios, y una aplicación de organización personal.</p><p>Los desarrollé mediante vibe coding con Claude, en un proceso iterativo. Parto de comprender el problema y el funcionamiento del negocio, Claude escribe el código, y cada versión se prueba y ajusta hasta cumplir con altos estándares de uso.</p>
+<ul class="skills"><li>Vibe coding con Claude Code</li><li>IA generativa (Claude y ChatGPT)</li><li>Costeo, márgenes y flujo de caja</li><li>Diseño de producto y experiencia móvil</li><li>Automatización de procesos</li><li>Análisis de datos</li><li>E-commerce y medios de pago</li></ul></div>
+<div class="index"><p class="label">Proyectos</p><ol>
+<li><a href="#arcano-es" data-p="arcano"><span class="dot"></span><strong>Arcano Record Store</strong><small>E-commerce</small></a></li>
+<li><a href="#stock-es" data-p="arcano"><span class="dot"></span><strong>Arcano · Stock y gestión</strong><small>Gestión y finanzas</small></a></li>
+<li><a href="#house-mates-es" data-p="hm"><span class="dot"></span><strong>House Mates · Panel</strong><small>Gestión y finanzas</small></a></li>
+<li><a href="#second-brain-es" data-p="sb"><span class="dot"></span><strong>Second Brain</strong><small>App personal · PWA</small></a></li>
+<li><a href="#landing-es" data-p="gastro"><span class="dot"></span><strong>Landing para una gastroenteróloga</strong><small>Proyecto adicional</small></a></li>
+</ol></div></div>
+</header>
+<section class="bring wrap"><p class="label">Perfil</p><h2>Qué puedo aportar</h2><div class="bring-grid"><div><h3>Automatización de procesos con IA</h3><p>Identifico tareas repetitivas y las automatizo con inteligencia artificial, como la carga de productos a partir de las facturas de los proveedores o el libro de caja que se genera a partir de cada fiesta.</p></div><div><h3>Sistemas internos de gestión</h3><p>Desarrollo con Claude sistemas de gestión completos, desde el relevamiento de lo que necesita el negocio hasta las pruebas, la publicación, la documentación y la capacitación de quienes los usan.</p></div><div><h3>Conocimiento del negocio</h3><p>Gestiono una disquería y una productora de eventos, lo que me da experiencia en compras, inventario, control de márgenes y cierre de caja, y me permite diseñar sistemas pensados para quienes los usan.</p></div></div></section>
+<section class="bring how wrap"><p class="label">Método</p><h2>Cómo trabajo</h2><div class="bring-grid"><div><h3>Pruebas</h3><p>Los proyectos incluyen pruebas automáticas, chequeos antes de cada publicación e integración continua con GitHub Actions.</p></div><div><h3>Documentación</h3><p>Cada proyecto cuenta con documentación de instalación, despliegue y funcionamiento del sistema.</p></div><div><h3>Seguridad</h3><p>Las claves y los datos sensibles se mantienen fuera del código, el acceso se limita a usuarios autorizados y los repositorios se revisan antes de publicarse.</p></div><div><h3>Versionado</h3><p>Todo el desarrollo se gestiona con Git, con más de 600 versiones publicadas entre los cuatro proyectos.</p></div></div></section>
+<article class="project wrap" id="arcano-es" data-p="arcano">
+<div class="eyebrow"><span class="chip">E-commerce</span><span class="label">Negocio propio · en producción</span></div>
+<h2>Arcano Record Store</h2><p class="lede">Tienda online de mi disquería.</p>
+<div class="links"><a href="https://arcanorecordstore.com" target="_blank" rel="noopener">arcanorecordstore.com ↗</a><a href="https://github.com/arcanorecordstore-creator/arcano-stock" target="_blank" rel="noopener">Ver código ↗</a></div>
+<dl class="summary"><div><dt>Problema</dt><dd>Las ventas se realizaban exclusivamente a través de mensajes de Instagram.</dd></div><div><dt>Solución</dt><dd>Una tienda online conectada al stock real, en la que cada disco puede escucharse, reservarse o pagarse en línea.</dd></div><div><dt>Resultado</dt><dd>En funcionamiento desde agosto de 2026 en arcanorecordstore.com, con más de 50 ventas a través de la tienda online.</dd></div><div><dt>Mi rol</dt><dd>Como dueño del negocio y del producto, me encargué de la definición, el diseño, las pruebas y la publicación.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com</em></div><button class="shot" type="button"><img src="img/ar-t-home.webp" alt="Portada de la tienda con el buscador y el carrusel de destacados" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/ar-t-m-disco.webp" alt="Portada de la tienda con el buscador y el carrusel de destacados" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Portada.</b> Incluye el buscador, los beneficios de compra y el primer carrusel. Cada tapa cuenta con su propio botón de reproducción.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Decisiones de proyecto</h3><div class="decisions"><div class="decision"><h4>Venta anticipada mediante Pre-order</h4><p>Los discos de cada pedido se publican en Pre-order mientras están en tránsito. Esto permite que los clientes los reserven antes de su llegada, anticipar las ventas del pedido y conocer la demanda antes de realizar la siguiente compra.</p></div><div class="decision"><h4>La escucha como eje de la tienda</h4><p>En los vinilos de música electrónica, la decisión de compra se toma escuchando. Por ese motivo, el reproductor, las muestras de cada canción y el registro de escuchas ocupan un lugar central en la tienda.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Versiones publicadas</dt><dd class="big">~150</dd><dd>con cambios en la tienda, del 29 de julio al 16 de octubre de 2026</dd></div>
+<div><dt>Usuarios</dt><dd>Clientes de la tienda</dd></div>
+<div><dt>Tecnologías</dt><dd class="tags"><span>Python</span><span>Flask</span><span>SQLAlchemy</span><span>SQLite</span><span>Jinja</span><span>JavaScript</span><span>Mercado Pago</span><span>Render</span><span>Cloudflare</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com</em></div><button class="shot" type="button"><img src="img/ar-t-nuevos.webp" alt="Nuevos ingresos. Los discos se presentan como vinilos que giran durante la reproducción." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Nuevos ingresos.</b> Los discos se presentan como vinilos que giran durante la reproducción.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com/#catalogo</em></div><button class="shot" type="button"><img src="img/ar-t-catalogo.webp" alt="Catálogo. Filtros con la cantidad de discos por opción, vista en grilla o lista, e indicadores de Pre-order y Nuevo." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Catálogo.</b> Filtros con la cantidad de discos por opción, vista en grilla o lista, e indicadores de Pre-order y Nuevo.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com/viceversa-depth-over-distance</em></div><button class="shot" type="button"><img src="img/ar-t-disco2.webp" alt="Tracklist. Cada canción puede escucharse desde la ficha y continúa en el reproductor flotante." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Tracklist.</b> Cada canción puede escucharse desde la ficha y continúa en el reproductor flotante.</figcaption></figure>
+</div>
+</article>
+<article class="project wrap" id="stock-es" data-p="arcano">
+<div class="eyebrow"><span class="chip">Gestión y finanzas</span><span class="label">Negocio propio · en producción</span></div>
+<h2>Arcano · Stock y gestión</h2><p class="lede">Sistema de back-office de la tienda, que integra la carga de discos, el stock, las ventas, las reservas, las compras a proveedores, la caja y la contabilidad.</p>
+<div class="links"><a href="https://github.com/arcanorecordstore-creator/arcano-stock" target="_blank" rel="noopener">Ver código ↗</a></div>
+<dl class="summary"><div><dt>Problema</dt><dd>La contabilidad se llevaba en una planilla y la carga manual de cada disco demandaba mucho tiempo.</dd></div><div><dt>Solución</dt><dd>Un sistema en el que cada disco ingresa con su costo real y cada venta actualiza en simultáneo el stock, la caja y la contabilidad.</dd></div><div><dt>Resultado</dt><dd>La carga de un disco se reduce a pegar un enlace o subir la factura y revisar los datos. El margen, el recupero y la rotación de cada pedido pueden consultarse al instante.</dd></div><div><dt>Mi rol</dt><dd>Diseñé el modelo de costos y las reglas contables, y definí cada una de las pantallas.</dd></div></dl>
+<p class="lead-note">Es el proyecto en el que más se refleja mi formación en administración de empresas, a través del costeo real por unidad, el recupero de cada compra, la rotación de inventario, el flujo de caja y una contabilidad que separa el negocio de lo personal. Incluye además un tablero de tareas con fechas límite y la carga automática de discos mediante una conexión por API con Claude, que lee facturas y capturas y completa la ficha de cada disco.</p>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Home del admin</em></div><button class="shot" type="button"><img src="img/ar-a-home.webp" alt="Home del panel con indicadores del mes y caja" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/ar-a-m-home.webp" alt="Home del panel con indicadores del mes y caja" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Home.</b> Resumen mensual de ventas, ganancia, montos por cobrar y stock disponible, junto con la caja y las tareas.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Decisiones de proyecto</h3><div class="decisions"><div class="decision"><h4>Cada pedido como una inversión</h4><p>Cada compra al proveedor muestra su costo total en pesos, el monto recuperado con ventas, el margen y la rotación, indicada con un semáforo (verde a partir del 70 % vendido y rojo por debajo del 30 %).</p></div><div class="decision"><h4>Separación entre lo personal y el negocio</h4><p>Algunos discos provienen de mi colección personal. Cuando se venden, se registran como aporte y no restan costo, mientras que el stock del negocio sin vender sí se descuenta de la ganancia real. De este modo, el resultado refleja únicamente la actividad de Arcano.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Versiones publicadas</dt><dd class="big">~340</dd><dd>con cambios en el panel, del 29 de julio al 16 de octubre de 2026</dd></div>
+<div><dt>Usuarios</dt><dd>Uso propio diario, desde computadora y celular</dd></div>
+<div><dt>Tecnologías</dt><dd class="tags"><span>Flask</span><span>SQLAlchemy</span><span>Claude API</span><span>BeautifulSoup</span><span>ReportLab</span><span>openpyxl</span><span>Web Push</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Agregar desde factura</em></div><button class="shot" type="button"><img src="img/ar-a-frominvoice.webp" alt="Carga desde una factura. La IA extrae todos los discos de la factura y distribuye el costo de envío entre ellos." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Carga desde una factura.</b> La IA extrae todos los discos de la factura y distribuye el costo de envío entre ellos.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Pedidos</em></div><button class="shot" type="button"><img src="img/ar-a-pedidos.webp" alt="Pedidos. Costo de cada compra, monto recuperado, rotación y proyección." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Pedidos.</b> Costo de cada compra, monto recuperado, rotación y proyección.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Radar de demanda</em></div><button class="shot" type="button"><img src="img/ar-a-radar.webp" alt="Radar de demanda. Muestra qué discos generan mayor interés y qué búsquedas no encontraron resultados." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Radar de demanda.</b> Muestra qué discos generan mayor interés y qué búsquedas no encontraron resultados.</figcaption></figure>
+</div>
+<p class="note">Capturas tomadas sobre una copia de prueba de la base de datos, por lo que los montos no corresponden a las cifras reales del negocio.</p>
+</article>
+<article class="project wrap" id="house-mates-es" data-p="hm">
+<div class="eyebrow"><span class="chip">Gestión y finanzas</span><span class="label">3 socios · en producción</span></div>
+<h2>House Mates · Panel</h2><p class="lede">Sistema de gestión y contabilidad de House Mates, mi productora de eventos, que gestiono junto a dos socios.</p>
+<div class="links"><span>Acceso privado</span></div>
+<dl class="summary"><div><dt>Problema</dt><dd>Durante tres años, las cuentas se llevaron en Notion, lo que dificultaba saber con certeza cuánto dinero había, dónde se encontraba y a quién correspondía reintegrar.</dd></div><div><dt>Solución</dt><dd>Un panel en el que el libro de caja se genera automáticamente a partir de las entradas, los gastos y la barra, aplicando las reglas acordadas entre los socios.</dd></div><div><dt>Resultado</dt><dd>Utilizado por los tres socios, con 11 fiestas registradas y un reporte de cierre en PDF para cada una.</dd></div><div><dt>Mi rol</dt><dd>Relevé junto a mis socios cómo se distribuye el dinero, lo traduje a reglas y diseñé el panel.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Dashboard</em></div><button class="shot" type="button"><img src="img/hm-inicio.webp" alt="Dashboard con la próxima fiesta y totales" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/hm-m-evento.webp" alt="Dashboard con la próxima fiesta y totales" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Dashboard.</b> Próxima fiesta en preparación, actividades de la semana y totales de todas las fiestas.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Decisiones de proyecto</h3><div class="decisions"><div class="decision"><h4>Una única versión de los números</h4><p>Los movimientos de caja no se cargan manualmente, sino que se generan a partir de las entradas, los gastos y la barra registrados en cada fiesta. De esta forma, existe una sola versión de los números y cada saldo puede rastrearse hasta su origen.</p></div><div class="decision"><h4>Proyección de la próxima fiesta</h4><p>Antes de cada fiesta, el panel estima los ingresos, los gastos, el resultado y la cantidad de entradas a partir del promedio de las fiestas anteriores, lo que permite elaborar el presupuesto con datos.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Versiones publicadas</dt><dd class="big">91</dd><dd>del 21 de septiembre al 9 de octubre de 2026</dd></div>
+<div><dt>Tecnologías</dt><dd class="tags"><span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL (Neon)</span><span>Tailwind</span><span>Recharts</span><span>Better Auth</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Fiesta</em></div><button class="shot" type="button"><img src="img/hm-evento.webp" alt="Detalle de una fiesta. Ingresos, egresos, ticket promedio, costo por asistente y margen de la noche." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Detalle de una fiesta.</b> Ingresos, egresos, ticket promedio, costo por asistente y margen de la noche.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Reporte de cierre</em></div><button class="shot" type="button"><img src="img/hm-cierre.webp" alt="Reporte de cierre. Resumen por rubro, por tanda de entradas y por público, descargable en PDF." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Reporte de cierre.</b> Resumen por rubro, por tanda de entradas y por público, descargable en PDF.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Socios</em></div><button class="shot" type="button"><img src="img/hm-socios.webp" alt="Socios. Saldo de cada socio con la productora." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Socios.</b> Saldo de cada socio con la productora.</figcaption></figure>
+</div>
+<p class="note">Los montos fueron alterados y los nombres de los socios modificados para proteger la información del negocio. Las proporciones y la estructura corresponden a los datos reales.</p>
+</article>
+<article class="project wrap" id="second-brain-es" data-p="sb">
+<div class="eyebrow"><span class="chip">App personal · PWA</span><span class="label">Uso diario · en producción</span></div>
+<h2>Second Brain</h2><p class="lede">Una única aplicación para registrar hábitos, escribir, controlar gastos y planificar la semana, que además relaciona los datos entre sí.</p>
+<div class="links"><a href="https://github.com/facundolapente-blip/second-brain" target="_blank" rel="noopener">Ver código ↗</a></div>
+<dl class="summary"><div><dt>Problema</dt><dd>Utilizaba cuatro aplicaciones pagas e independientes (HabitNow, My Diary, una app de gastos y Notion) que no se ajustaban del todo a mis necesidades.</dd></div><div><dt>Solución</dt><dd>Una única aplicación que las reemplaza, importa el historial de cada una e incorpora un tablero que integra toda la información.</dd></div><div><dt>Resultado</dt><dd>En uso diario desde octubre de 2026, con 114 versiones publicadas en 11 días.</dd></div><div><dt>Mi rol</dt><dd>Usuario, diseñador y responsable de producto. De cada aplicación conservé las funciones que mejor resultaban.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Inicio</em></div><button class="shot" type="button"><img src="img/sb-inicio.webp" alt="Inicio de Second Brain con el resumen del día" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/sb-m-habitos.webp" alt="Inicio de Second Brain con el resumen del día" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Inicio.</b> Resumen del día en una frase, cuatro indicadores clave y las listas de hábitos y del plan de hoy.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Decisiones de proyecto</h3><div class="decisions"><div class="decision"><h4>Registro de gastos en segundos</h4><p>Un gasto se registra escribiendo una línea como &quot;350 almuerzo itau&quot;. La aplicación interpreta el monto, la cuenta y la fecha, y sugiere la categoría a partir de la clasificación de gastos anteriores.</p></div><div class="decision"><h4>Finanzas personales con criterio empresarial</h4><p>Incluye proyección del cierre del mes, presupuestos por categoría, tarjetas con fecha de cierre y cuotas, metas de ahorro y patrimonio en pesos según la cotización del día.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Versiones publicadas</dt><dd class="big">122</dd><dd>del 2 al 16 de octubre de 2026</dd></div>
+<div><dt>Tecnologías</dt><dd class="tags"><span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL</span><span>Tailwind</span><span>Recharts</span><span>Vercel</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Gastos</em></div><button class="shot" type="button"><img src="img/sb-gastos.webp" alt="Gastos. Carga rápida en lenguaje natural, saldos en pesos y dólares, y gasto por categoría." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Gastos.</b> Carga rápida en lenguaje natural, saldos en pesos y dólares, y gasto por categoría.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Plan semanal</em></div><button class="shot" type="button"><img src="img/sb-tareas.webp" alt="Plan semanal. Tareas organizadas por estado, con prioridad y vencimiento, y debajo la semana en bloques." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Plan semanal.</b> Tareas organizadas por estado, con prioridad y vencimiento, y debajo la semana en bloques.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Análisis</em></div><button class="shot" type="button"><img src="img/sb-analisis.webp" alt="Análisis. Relaciones entre módulos, con un mínimo de días por grupo para cada conclusión." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Análisis.</b> Relaciones entre módulos, con un mínimo de días por grupo para cada conclusión.</figcaption></figure>
+</div>
+<p class="note">Las capturas utilizan una base de demostración, con hábitos, gastos y entradas ficticias.</p>
+</article>
+<article class="project bonus wrap" id="landing-es" data-p="gastro">
+<div class="eyebrow"><span class="chip">Landing page</span><span class="label">Proyecto adicional · demo publicada</span></div>
+<h2>Landing para una gastroenteróloga</h2><p class="lede">Sitio web para una médica gastroenteróloga que atiende en Montevideo, Rosario y San José. Automatiza el pedido de turnos, que llega por WhatsApp listo para confirmar, sin necesidad de un sistema de agenda.</p>
+<div class="links"><a href="https://facundolapente-blip.github.io/dra-marianela-gutierrez/" target="_blank" rel="noopener">Ver demo ↗</a><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+<dl class="summary"><div><dt>Reserva de turnos</dt><dd>El paciente elige el consultorio, el día y el horario, y la página prepara un mensaje de WhatsApp con el pedido, sin necesidad de un sistema de agenda.</dd></div><div><dt>Contenido centralizado</dt><dd>Los datos de la médica, los servicios, los horarios y las preguntas frecuentes se modifican desde un único archivo de configuración.</dd></div><div><dt>Pensada para el celular</dt><dd>En el celular, una barra fija mantiene siempre visibles los accesos para sacar hora y escribir por WhatsApp.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>dra-marianela-gutierrez</em></div><button class="shot" type="button"><img src="img/g-home.webp" alt="Portada con el formulario de reserva completo" loading="lazy" decoding="async" width="2880" height="1800"></button></div></div><figcaption><b>Portada.</b> La reserva se completa en cuatro pasos, desde la elección del consultorio hasta la confirmación por WhatsApp.</figcaption></figure>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Quién soy</em></div><button class="shot" type="button"><img src="img/g-medico.webp" alt="Presentación de la médica. Especialidad, terapias complementarias y consultorios." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Presentación de la médica.</b> Especialidad, terapias complementarias y consultorios.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Tu consulta</em></div><button class="shot" type="button"><img src="img/g-consulta.webp" alt="La consulta, paso a paso. Qué ocurre desde la reserva hasta el seguimiento." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>La consulta, paso a paso.</b> Qué ocurre desde la reserva hasta el seguimiento.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Consultorios</em></div><button class="shot" type="button"><img src="img/g-ubicacion.webp" alt="Consultorios. Las tres ciudades de atención, con mapa y acceso a cómo llegar." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Consultorios.</b> Las tres ciudades de atención, con mapa y acceso a cómo llegar.</figcaption></figure>
+</div></article>
+<div class="contact wrap"><p class="label">Contacto</p><ul><li><a href="mailto:facundo.lapente@gmail.com">facundo.lapente@gmail.com</a></li><li><a href="https://www.linkedin.com/in/facundo-lapente-91bb49248/" target="_blank" rel="noopener">linkedin.com/in/facundo-lapente ↗</a></li><li>Montevideo, Uruguay</li></ul></div>
+<footer class="foot"><div class="wrap row-between"><span class="mono">Facundo Lapente · Montevideo</span><span class="mono">Capturas tomadas el 13/10/2026</span></div></footer></div>
+<div class="lang-block" data-l="en" lang="en"><nav class="side" aria-label="Projects"><p class="label">Facundo Lapente</p><ol><li><a href="#arcano-en">Arcano Record Store</a></li><li><a href="#stock-en">Arcano · Inventory and operations</a></li><li><a href="#house-mates-en">House Mates · Panel</a></li><li><a href="#second-brain-en">Second Brain</a></li><li><a href="#landing-en">Landing page for a gastroenterologist</a></li></ol></nav>
+<header class="hero wrap">
+<div class="row-between"><span class="label">Portfolio · 2026</span><span class="label">Montevideo, Uruguay</span></div>
+<h1>Facundo Lapente</h1><p class="role">Business management, product and AI-assisted development</p>
+<div class="hero-grid"><div class="intro"><p>I develop digital tools focused on business management. The four projects in this portfolio are currently in use. They are the online store of my record shop, the system I use to manage it, the accounting panel of my event production company, which I run with two partners, and a personal organization app.</p><p>I developed them through vibe coding with Claude, in an iterative process. I start by understanding the problem and how the business works, Claude writes the code, and each version is tested and refined until it meets high usability standards.</p>
+<ul class="skills"><li>Vibe coding with Claude Code</li><li>Generative AI (Claude and ChatGPT)</li><li>Costing, margins and cash flow</li><li>Product design and mobile experience</li><li>Process automation</li><li>Data analysis</li><li>E-commerce and payment methods</li></ul></div>
+<div class="index"><p class="label">Projects</p><ol>
+<li><a href="#arcano-en" data-p="arcano"><span class="dot"></span><strong>Arcano Record Store</strong><small>E-commerce</small></a></li>
+<li><a href="#stock-en" data-p="arcano"><span class="dot"></span><strong>Arcano · Inventory and operations</strong><small>Operations and finance</small></a></li>
+<li><a href="#house-mates-en" data-p="hm"><span class="dot"></span><strong>House Mates · Panel</strong><small>Operations and finance</small></a></li>
+<li><a href="#second-brain-en" data-p="sb"><span class="dot"></span><strong>Second Brain</strong><small>Personal app · PWA</small></a></li>
+<li><a href="#landing-en" data-p="gastro"><span class="dot"></span><strong>Landing page for a gastroenterologist</strong><small>Additional project</small></a></li>
+</ol></div></div>
+</header>
+<section class="bring wrap"><p class="label">Profile</p><h2>What I bring</h2><div class="bring-grid"><div><h3>Process automation with AI</h3><p>I identify repetitive tasks and automate them with artificial intelligence, such as product intake from supplier invoices or the cash ledger generated from each party.</p></div><div><h3>Internal business systems</h3><p>I develop complete business systems with Claude, from gathering what the business needs to testing, deployment, documentation and training the people who use them.</p></div><div><h3>Business knowledge</h3><p>I manage a record shop and an event production company, which gives me experience in purchasing, inventory, margin control and cash reconciliation, and allows me to design systems built around the people who use them.</p></div></div></section>
+<section class="bring how wrap"><p class="label">Method</p><h2>How I work</h2><div class="bring-grid"><div><h3>Testing</h3><p>The projects include automated tests, checks before each release and continuous integration with GitHub Actions.</p></div><div><h3>Documentation</h3><p>Each project has documentation covering installation, deployment and how the system works.</p></div><div><h3>Security</h3><p>Secrets and sensitive data are kept out of the code, access is limited to authorized users and repositories are reviewed before being published.</p></div><div><h3>Version control</h3><p>All development is managed with Git, with more than 600 versions released across the four projects.</p></div></div></section>
+<article class="project wrap" id="arcano-en" data-p="arcano">
+<div class="eyebrow"><span class="chip">E-commerce</span><span class="label">Own business · in production</span></div>
+<h2>Arcano Record Store</h2><p class="lede">Online store of my record shop.</p>
+<div class="links"><a href="https://arcanorecordstore.com" target="_blank" rel="noopener">arcanorecordstore.com ↗</a><a href="https://github.com/arcanorecordstore-creator/arcano-stock" target="_blank" rel="noopener">View code ↗</a></div>
+<dl class="summary"><div><dt>Problem</dt><dd>Sales were handled exclusively through Instagram messages.</dd></div><div><dt>Solution</dt><dd>An online store connected to real inventory, where each record can be played, reserved or paid for online.</dd></div><div><dt>Outcome</dt><dd>Running since August 2026 at arcanorecordstore.com, with more than 50 sales through the online store.</dd></div><div><dt>My role</dt><dd>As owner of the business and the product, I handled its definition, design, testing and release.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com</em></div><button class="shot" type="button"><img src="img/ar-t-home.webp" alt="Store home page with search and the featured carousel" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/ar-t-m-disco.webp" alt="Store home page with search and the featured carousel" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Home page.</b> It includes search, purchase benefits and the first carousel. Each cover has its own play button.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Project decisions</h3><div class="decisions"><div class="decision"><h4>Advance sales through Pre-order</h4><p>Records from each order are listed as Pre-order while in transit. This allows customers to reserve them before arrival, brings forward the order&#x27;s sales and reveals demand before the next purchase.</p></div><div class="decision"><h4>Listening at the core of the store</h4><p>In electronic music vinyl, purchase decisions are made by listening. For that reason, the player, the samples of each track and play tracking are central to the store.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Releases</dt><dd class="big">~150</dd><dd>with changes to the store, from July 29 to October 16, 2026</dd></div>
+<div><dt>Users</dt><dd>Store customers</dd></div>
+<div><dt>Technologies</dt><dd class="tags"><span>Python</span><span>Flask</span><span>SQLAlchemy</span><span>SQLite</span><span>Jinja</span><span>JavaScript</span><span>Mercado Pago</span><span>Render</span><span>Cloudflare</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com</em></div><button class="shot" type="button"><img src="img/ar-t-nuevos.webp" alt="New arrivals. Records are displayed as vinyl that spins during playback." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>New arrivals.</b> Records are displayed as vinyl that spins during playback.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com/#catalogo</em></div><button class="shot" type="button"><img src="img/ar-t-catalogo.webp" alt="Catalog. Filters showing the number of records per option, grid or list view, and Pre-order and New indicators." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Catalog.</b> Filters showing the number of records per option, grid or list view, and Pre-order and New indicators.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>arcanorecordstore.com/viceversa-depth-over-distance</em></div><button class="shot" type="button"><img src="img/ar-t-disco2.webp" alt="Tracklist. Each track can be played from the record page and continues in the floating player." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Tracklist.</b> Each track can be played from the record page and continues in the floating player.</figcaption></figure>
+</div>
+</article>
+<article class="project wrap" id="stock-en" data-p="arcano">
+<div class="eyebrow"><span class="chip">Operations and finance</span><span class="label">Own business · in production</span></div>
+<h2>Arcano · Inventory and operations</h2><p class="lede">The store&#x27;s back-office system, integrating record intake, inventory, sales, reservations, supplier purchasing, cash and accounting.</p>
+<div class="links"><a href="https://github.com/arcanorecordstore-creator/arcano-stock" target="_blank" rel="noopener">View code ↗</a></div>
+<dl class="summary"><div><dt>Problem</dt><dd>Accounting was kept in a spreadsheet, and entering each record manually was time-consuming.</dd></div><div><dt>Solution</dt><dd>A system in which each record is entered at its real cost and each sale simultaneously updates inventory, cash and accounting.</dd></div><div><dt>Outcome</dt><dd>Adding a record comes down to pasting a link or uploading the invoice and reviewing the data. The margin, payback and turnover of each order can be checked instantly.</dd></div><div><dt>My role</dt><dd>I designed the cost model and the accounting rules, and defined each screen.</dd></div></dl>
+<p class="lead-note">This is the project that best reflects my business administration background, through real unit costing, payback on each purchase, inventory turnover, cash flow and accounting that separates the business from personal items. It also includes a task board with deadlines and automatic record intake through an API connection with Claude, which reads invoices and screenshots and completes each record.</p>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Admin home</em></div><button class="shot" type="button"><img src="img/ar-a-home.webp" alt="Admin home with monthly indicators and cash" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/ar-a-m-home.webp" alt="Admin home with monthly indicators and cash" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Home.</b> Monthly summary of sales, profit, receivables and available stock, together with cash and tasks.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Project decisions</h3><div class="decisions"><div class="decision"><h4>Each order as an investment</h4><p>Each supplier purchase shows its total cost in pesos, the amount recovered through sales, the margin and turnover, shown as a traffic light (green from 70 % sold, red below 30 %).</p></div><div class="decision"><h4>Separating personal and business</h4><p>Some records come from my personal collection. When sold, they are recorded as a contribution and carry no cost, while unsold business stock is deducted from real profit. This way, the result reflects only Arcano&#x27;s activity.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Releases</dt><dd class="big">~340</dd><dd>with changes to the panel, from July 29 to October 16, 2026</dd></div>
+<div><dt>Users</dt><dd>Daily personal use, on desktop and mobile</dd></div>
+<div><dt>Technologies</dt><dd class="tags"><span>Flask</span><span>SQLAlchemy</span><span>Claude API</span><span>BeautifulSoup</span><span>ReportLab</span><span>openpyxl</span><span>Web Push</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Add from invoice</em></div><button class="shot" type="button"><img src="img/ar-a-frominvoice.webp" alt="Adding from an invoice. AI extracts every record from the invoice and allocates the shipping cost among them." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Adding from an invoice.</b> AI extracts every record from the invoice and allocates the shipping cost among them.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Orders</em></div><button class="shot" type="button"><img src="img/ar-a-pedidos.webp" alt="Supplier orders. Cost of each purchase, amount recovered, turnover and projection." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Supplier orders.</b> Cost of each purchase, amount recovered, turnover and projection.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Arcano · Demand radar</em></div><button class="shot" type="button"><img src="img/ar-a-radar.webp" alt="Demand radar. Shows which records generate the most interest and which searches returned no results." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Demand radar.</b> Shows which records generate the most interest and which searches returned no results.</figcaption></figure>
+</div>
+<p class="note">Screenshots taken on a test copy of the database, so amounts do not reflect the business&#x27;s real figures.</p>
+</article>
+<article class="project wrap" id="house-mates-en" data-p="hm">
+<div class="eyebrow"><span class="chip">Operations and finance</span><span class="label">3 partners · in production</span></div>
+<h2>House Mates · Panel</h2><p class="lede">Management and accounting system for House Mates, my event production company, which I run with two partners.</p>
+<div class="links"><span>Private access</span></div>
+<dl class="summary"><div><dt>Problem</dt><dd>For three years, accounts were kept in Notion, which made it difficult to know with certainty how much money there was, where it was held and who was owed a reimbursement.</dd></div><div><dt>Solution</dt><dd>A panel in which the cash ledger is generated automatically from tickets, expenses and bar sales, applying the rules agreed upon by the partners.</dd></div><div><dt>Outcome</dt><dd>Used by all three partners, with 11 parties recorded and a PDF closing report for each one.</dd></div><div><dt>My role</dt><dd>Together with my partners, I mapped out how money is distributed, translated it into rules and designed the panel.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Dashboard</em></div><button class="shot" type="button"><img src="img/hm-inicio.webp" alt="Dashboard with the next party and totals" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/hm-m-evento.webp" alt="Dashboard with the next party and totals" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Dashboard.</b> Upcoming party in preparation, the week&#x27;s activities and totals across all parties.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Project decisions</h3><div class="decisions"><div class="decision"><h4>A single version of the numbers</h4><p>Cash movements are not entered manually; they are generated from the tickets, expenses and bar sales recorded for each party. This way, there is a single version of the numbers and every balance can be traced back to its source.</p></div><div class="decision"><h4>Projecting the next party</h4><p>Before each party, the panel estimates revenue, expenses, result and ticket count based on the average of previous parties, allowing the budget to be prepared with data.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Releases</dt><dd class="big">91</dd><dd>from September 21 to October 9, 2026</dd></div>
+<div><dt>Technologies</dt><dd class="tags"><span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL (Neon)</span><span>Tailwind</span><span>Recharts</span><span>Better Auth</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Party</em></div><button class="shot" type="button"><img src="img/hm-evento.webp" alt="Party detail. Revenue, expenses, average ticket, cost per attendee and margin for the night." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Party detail.</b> Revenue, expenses, average ticket, cost per attendee and margin for the night.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Closing report</em></div><button class="shot" type="button"><img src="img/hm-cierre.webp" alt="Closing report. Summary by category, ticket tier and audience, downloadable as PDF." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Closing report.</b> Summary by category, ticket tier and audience, downloadable as PDF.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>House Mates · Partners</em></div><button class="shot" type="button"><img src="img/hm-socios.webp" alt="Partners. Each partner&#x27;s balance with the company." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Partners.</b> Each partner&#x27;s balance with the company.</figcaption></figure>
+</div>
+<p class="note">Amounts have been altered and partner names changed to protect business information. Proportions and structure reflect the real data.</p>
+</article>
+<article class="project wrap" id="second-brain-en" data-p="sb">
+<div class="eyebrow"><span class="chip">Personal app · PWA</span><span class="label">Daily use · in production</span></div>
+<h2>Second Brain</h2><p class="lede">A single app to track habits, write, manage expenses and plan the week, which also relates the data across them.</p>
+<div class="links"><a href="https://github.com/facundolapente-blip/second-brain" target="_blank" rel="noopener">View code ↗</a></div>
+<dl class="summary"><div><dt>Problem</dt><dd>I used four separate paid apps (HabitNow, My Diary, an expense app and Notion) that did not fully fit my needs.</dd></div><div><dt>Solution</dt><dd>A single app that replaces them, imports each one&#x27;s history and adds a dashboard that brings all the information together.</dd></div><div><dt>Outcome</dt><dd>In daily use since October 2026, with 114 releases published in 11 days.</dd></div><div><dt>My role</dt><dd>User, designer and product owner. From each app, I kept the features that worked best.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Home</em></div><button class="shot" type="button"><img src="img/sb-inicio.webp" alt="Second Brain home with the day summary" loading="lazy" decoding="async" width="2880" height="1800"></button></div><div class="phone"><button class="shot" type="button"><img src="img/sb-m-habitos.webp" alt="Second Brain home with the day summary" loading="lazy" decoding="async" width="1170" height="2532"></button></div></div><figcaption><b>Home.</b> A one-sentence summary of the day, four key indicators, and today&#x27;s habits and plan.</figcaption></figure>
+<div class="body"><div class="prose">
+<section><h3>Project decisions</h3><div class="decisions"><div class="decision"><h4>Logging expenses in seconds</h4><p>An expense is logged by typing a line such as &quot;350 lunch itau&quot;. The app interprets the amount, account and date, and suggests a category based on how previous expenses were classified.</p></div><div class="decision"><h4>Personal finance with a business approach</h4><p>It includes month-end projection, category budgets, credit cards with statement dates and installments, savings goals, and net worth in pesos at the day&#x27;s exchange rate.</p></div></div></section>
+</div><aside class="facts"><dl>
+<div><dt>Releases</dt><dd class="big">122</dd><dd>from October 2 to 16, 2026</dd></div>
+<div><dt>Technologies</dt><dd class="tags"><span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL</span><span>Tailwind</span><span>Recharts</span><span>Vercel</span></dd></div>
+</dl></aside></div>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Expenses</em></div><button class="shot" type="button"><img src="img/sb-gastos.webp" alt="Expenses. Natural-language quick entry, balances in pesos and dollars, and spending by category." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Expenses.</b> Natural-language quick entry, balances in pesos and dollars, and spending by category.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Weekly plan</em></div><button class="shot" type="button"><img src="img/sb-tareas.webp" alt="Weekly plan. Tasks organized by status, with priority and due date, and the week in blocks below." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Weekly plan.</b> Tasks organized by status, with priority and due date, and the week in blocks below.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Second Brain · Insights</em></div><button class="shot" type="button"><img src="img/sb-analisis.webp" alt="Insights. Relationships between modules, with a minimum number of days per group for each finding." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Insights.</b> Relationships between modules, with a minimum number of days per group for each finding.</figcaption></figure>
+</div>
+<p class="note">Screenshots use a demo database with fictitious habits, expenses and entries.</p>
+</article>
+<article class="project bonus wrap" id="landing-en" data-p="gastro">
+<div class="eyebrow"><span class="chip">Landing page</span><span class="label">Additional project · published demo</span></div>
+<h2>Landing page for a gastroenterologist</h2><p class="lede">Website for a gastroenterologist who sees patients in Montevideo, Rosario and San José. It automates appointment requests, which arrive through WhatsApp ready to confirm, without the need for a scheduling system.</p>
+<div class="links"><a href="https://facundolapente-blip.github.io/dra-marianela-gutierrez/" target="_blank" rel="noopener">View demo ↗</a><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+<dl class="summary"><div><dt>Appointment booking</dt><dd>The patient chooses the clinic, day and time, and the page prepares a WhatsApp message with the request, without the need for a scheduling system.</dd></div><div><dt>Centralized content</dt><dd>The doctor&#x27;s details, services, hours and frequently asked questions are edited from a single configuration file.</dd></div><div><dt>Built for mobile</dt><dd>On mobile, a fixed bar keeps the booking and WhatsApp buttons always visible.</dd></div></dl>
+<figure class="comp"><div class="comp-stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><em>dra-marianela-gutierrez</em></div><button class="shot" type="button"><img src="img/g-home.webp" alt="Home page with the completed booking form" loading="lazy" decoding="async" width="2880" height="1800"></button></div></div><figcaption><b>Home page.</b> Booking takes four steps, from choosing the clinic to confirming through WhatsApp.</figcaption></figure>
+<div class="gallery">
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>About</em></div><button class="shot" type="button"><img src="img/g-medico.webp" alt="About the doctor. Specialty, complementary therapies and clinics." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>About the doctor.</b> Specialty, complementary therapies and clinics.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Your visit</em></div><button class="shot" type="button"><img src="img/g-consulta.webp" alt="The visit, step by step. What happens from booking to follow-up." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>The visit, step by step.</b> What happens from booking to follow-up.</figcaption></figure>
+<figure><div class="browser"><div class="bar"><i></i><i></i><i></i><em>Clinics</em></div><button class="shot" type="button"><img src="img/g-ubicacion.webp" alt="Clinics. The three cities where she practices, with a map and directions." loading="lazy" decoding="async" width="2880" height="1800"></button></div><figcaption><b>Clinics.</b> The three cities where she practices, with a map and directions.</figcaption></figure>
+</div></article>
+<div class="contact wrap"><p class="label">Contact</p><ul><li><a href="mailto:facundo.lapente@gmail.com">facundo.lapente@gmail.com</a></li><li><a href="https://www.linkedin.com/in/facundo-lapente-91bb49248/" target="_blank" rel="noopener">linkedin.com/in/facundo-lapente ↗</a></li><li>Montevideo, Uruguay</li></ul></div>
+<footer class="foot"><div class="wrap row-between"><span class="mono">Facundo Lapente · Montevideo</span><span class="mono">Screenshots taken on 10/13/2026</span></div></footer></div>
+<div class="controls" role="group" aria-label="Opciones" data-uncommentable>
+  <div class="seg" id="lang-seg"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+</div>
+<p class="toast" id="toast" role="status" aria-live="polite" hidden data-uncommentable></p>
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Captura ampliada" data-uncommentable>
+  <div class="viewer-top"><button type="button" id="v-prev"></button><button type="button" id="v-next"></button><button type="button" id="v-close"></button></div>
+  <div class="viewer-stage" id="v-stage"><img id="v-img" alt=""></div>
+  <p class="viewer-cap" id="v-cap"></p>
+</div>
+<script type="application/json" id="pf-edits">{}</script>
+
+<script>
+const UI = {"es": {"prev": "← Anterior", "next": "Siguiente →", "close": "Cerrar"}, "en": {"prev": "← Previous", "next": "Next →", "close": "Close"}};
+(() => {
+  const root = document.documentElement;
+  const $ = (id) => document.getElementById(id);
+  const save = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
+
+  // ---------- Idioma ----------
+  const mark = () => {
+    document.querySelectorAll("#lang-seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === root.dataset.lang)));
+    const ui = UI[root.dataset.lang] || UI.es;
+    $("v-prev").textContent = ui.prev; $("v-next").textContent = ui.next; $("v-close").textContent = ui.close;
+  };
+  document.querySelectorAll("#lang-seg button").forEach((b) => b.addEventListener("click", () => {
+    root.dataset.lang = b.dataset.lang; root.lang = b.dataset.lang; save("pf-lang", b.dataset.lang); mark();
+  }));
+  mark();
+
+  let editing = false, picking = false;
+
+  // ---------- Visor de capturas ----------
+  const viewer = $("viewer"), stage = $("v-stage"), img = $("v-img"), cap = $("v-cap");
+  let list = [], i = 0, last = null;
+  const show = (n) => {
+    i = (n + list.length) % list.length;
+    const src = list[i].querySelector("img");
+    stage.classList.remove("zoom");
+    img.src = src.currentSrc || src.src; img.alt = src.alt;
+    const fc = list[i].closest("figure")?.querySelector("figcaption");
+    cap.textContent = fc ? fc.textContent : src.alt;
+  };
+  document.addEventListener("click", (ev) => {
+    if (editing || picking) return;
+    const b = ev.target.closest(".shot");
+    if (!b) return;
+    list = [...b.closest(".lang-block").querySelectorAll(".shot")];
+    last = b; show(list.indexOf(b));
+    viewer.hidden = false; document.body.style.overflow = "hidden"; $("v-close").focus();
+  });
+  const close = () => { viewer.hidden = true; document.body.style.overflow = ""; if (last) last.focus(); };
+  $("v-close").addEventListener("click", close);
+  $("v-prev").addEventListener("click", () => show(i - 1));
+  $("v-next").addEventListener("click", () => show(i + 1));
+  img.addEventListener("click", () => stage.classList.toggle("zoom"));
+  stage.addEventListener("click", (ev) => { if (ev.target === stage) close(); });
+  document.addEventListener("keydown", (ev) => {
+    if (viewer.hidden) return;
+    if (ev.key === "Escape") close();
+    if (ev.key === "ArrowRight") show(i + 1);
+    if (ev.key === "ArrowLeft") show(i - 1);
+  });
+})();
+
+</script>
+</body>
+</html>
