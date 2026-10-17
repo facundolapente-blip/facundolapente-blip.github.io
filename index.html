@@ -468,10 +468,17 @@ figcaption b { color: var(--ink); font-weight: 650; }
   .note { font-size: 8pt; }
 }
 
+/* ---------- Idioma en el lateral ---------- */
+.side-lang { display: flex; gap: 4px; margin-top: 12px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; width: fit-content; }
+.side-lang button { font: 500 12.5px var(--f-body); color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.side-lang button:hover { color: var(--ink); }
+.side-lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+@media (min-width: 1360px) { :root[data-opt="b"] .controls { display: none; } }
+
 </style>
 </head>
 <body>
-<div class="lang-block" data-l="es" lang="es"><nav class="side" aria-label="Proyectos"><p class="label">Facundo Lapente</p><ol><li><a href="#arcano-es">Arcano Record Store</a></li><li><a href="#stock-es">Arcano · Stock y gestión</a></li><li><a href="#house-mates-es">House Mates · Panel</a></li><li><a href="#second-brain-es">Second Brain</a></li><li><a href="#landing-es">Landing para una gastroenteróloga</a></li></ol></nav>
+<div class="lang-block" data-l="es" lang="es"><nav class="side" aria-label="Proyectos"><p class="label">Facundo Lapente</p><div class="side-lang" role="group" aria-label="Idioma"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><ol><li><a href="#arcano-es">Arcano Record Store</a></li><li><a href="#stock-es">Arcano · Stock y gestión</a></li><li><a href="#house-mates-es">House Mates · Panel</a></li><li><a href="#second-brain-es">Second Brain</a></li><li><a href="#landing-es">Landing para una gastroenteróloga</a></li></ol></nav>
 <header class="hero wrap">
 <div class="row-between"><span class="label">Portafolio · 2026</span><span class="label">Montevideo, Uruguay</span></div>
 <h1>Facundo Lapente</h1><p class="role">Gestión de negocios, producto y desarrollo con inteligencia artificial</p>
@@ -578,7 +585,7 @@ figcaption b { color: var(--ink); font-weight: 650; }
 </div></article>
 <div class="contact wrap"><p class="label">Contacto</p><ul><li><a href="mailto:facundo.lapente@gmail.com">facundo.lapente@gmail.com</a></li><li><a href="https://www.linkedin.com/in/facundo-lapente-91bb49248/" target="_blank" rel="noopener">linkedin.com/in/facundo-lapente ↗</a></li><li>Montevideo, Uruguay</li></ul></div>
 <footer class="foot"><div class="wrap row-between"><span class="mono">Facundo Lapente · Montevideo</span><span class="mono">Capturas tomadas el 13/10/2026</span></div></footer></div>
-<div class="lang-block" data-l="en" lang="en"><nav class="side" aria-label="Projects"><p class="label">Facundo Lapente</p><ol><li><a href="#arcano-en">Arcano Record Store</a></li><li><a href="#stock-en">Arcano · Inventory and operations</a></li><li><a href="#house-mates-en">House Mates · Panel</a></li><li><a href="#second-brain-en">Second Brain</a></li><li><a href="#landing-en">Landing page for a gastroenterologist</a></li></ol></nav>
+<div class="lang-block" data-l="en" lang="en"><nav class="side" aria-label="Projects"><p class="label">Facundo Lapente</p><div class="side-lang" role="group" aria-label="Language"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><ol><li><a href="#arcano-en">Arcano Record Store</a></li><li><a href="#stock-en">Arcano · Inventory and operations</a></li><li><a href="#house-mates-en">House Mates · Panel</a></li><li><a href="#second-brain-en">Second Brain</a></li><li><a href="#landing-en">Landing page for a gastroenterologist</a></li></ol></nav>
 <header class="hero wrap">
 <div class="row-between"><span class="label">Portfolio · 2026</span><span class="label">Montevideo, Uruguay</span></div>
 <h1>Facundo Lapente</h1><p class="role">Business management, product and AI-assisted development</p>
@@ -686,7 +693,7 @@ figcaption b { color: var(--ink); font-weight: 650; }
 <div class="contact wrap"><p class="label">Contact</p><ul><li><a href="mailto:facundo.lapente@gmail.com">facundo.lapente@gmail.com</a></li><li><a href="https://www.linkedin.com/in/facundo-lapente-91bb49248/" target="_blank" rel="noopener">linkedin.com/in/facundo-lapente ↗</a></li><li>Montevideo, Uruguay</li></ul></div>
 <footer class="foot"><div class="wrap row-between"><span class="mono">Facundo Lapente · Montevideo</span><span class="mono">Screenshots taken on 10/13/2026</span></div></footer></div>
 <div class="controls" role="group" aria-label="Opciones" data-uncommentable>
-  <div class="seg" id="lang-seg"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+  <div class="seg" id="lang-seg"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div>
 </div>
 <p class="toast" id="toast" role="status" aria-live="polite" hidden data-uncommentable></p>
 <div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Captura ampliada" data-uncommentable>
@@ -705,11 +712,11 @@ const UI = {"es": {"prev": "← Anterior", "next": "Siguiente →", "close": "Ce
 
   // ---------- Idioma ----------
   const mark = () => {
-    document.querySelectorAll("#lang-seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === root.dataset.lang)));
+    document.querySelectorAll("#lang-seg button, .side-lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === root.dataset.lang)));
     const ui = UI[root.dataset.lang] || UI.es;
     $("v-prev").textContent = ui.prev; $("v-next").textContent = ui.next; $("v-close").textContent = ui.close;
   };
-  document.querySelectorAll("#lang-seg button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll("#lang-seg button, .side-lang button").forEach((b) => b.addEventListener("click", () => {
     root.dataset.lang = b.dataset.lang; root.lang = b.dataset.lang; save("pf-lang", b.dataset.lang); mark();
   }));
   mark();
