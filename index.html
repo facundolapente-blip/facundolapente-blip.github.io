@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap">
-<script>(()=>{let l="es";try{l=localStorage.getItem("pf-lang")||l}catch(_){}const h=location.hash.slice(1);if(h==="en"||h==="es")l=h;const r=document.documentElement;r.dataset.opt="b";r.dataset.lang=l;r.lang=l})();</script>
+<script>(()=>{let l="es";try{l=localStorage.getItem("pf-lang")||l}catch(_){}const h=location.hash.slice(1);if(h==="en"||h==="es")l=h;const r=document.documentElement;r.dataset.opt="b";let t="light";try{t=localStorage.getItem("pf-theme")||t}catch(_){}if(t!=="light"&&t!=="dark")t="light";r.dataset.theme=t;r.dataset.lang=l;r.lang=l})();</script>
 <style>
 /* Layout: columna central de 1200px; cada proyecto = cabecera, resumen ejecutivo, composición compu+celular, texto con ficha lateral y galería.
    Tres opciones de diseño neutras sobre el mismo HTML: A Grafito (claro), B Informe (reporte ejecutivo), C Carbón (oscuro). */
@@ -475,10 +475,60 @@ figcaption b { color: var(--ink); font-weight: 650; }
 .side-lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 @media (min-width: 1360px) { :root[data-opt="b"] .controls { display: none; } }
 
+
+/* ---------- Temas: Cálido (light) y Oscuro (dark), solo en pantalla ---------- */
+@media screen {
+  :root[data-opt="b"][data-theme="light"] {
+    --bg: #f4efe7; --surface: #fffcf7; --sunk: #ebe4d8; --ink: #1f1a14; --muted: #6f665a; --line: #ddd3c3;
+    --accent: #1f1a14; --on-accent: #fffcf7; --frame: #ece5d9;
+    --dot-arcano: #8a6d52; --dot-sb: #4f7a68; --dot-hm: #56619c; color-scheme: light;
+  }
+  :root[data-opt="b"][data-theme="dark"] {
+    --bg: #111214; --surface: #191b1e; --sunk: #202327; --ink: #eceae6; --muted: #9a9ca1; --line: #2b2e33;
+    --accent: #eceae6; --on-accent: #111214; --frame: #202327;
+    --dot-arcano: #d9a66b; --dot-sb: #6fcfa5; --dot-hm: #8f9cff; color-scheme: dark;
+  }
+  :root[data-opt="b"][data-theme="dark"] [data-p="gastro"] { --dot: #e3876b; }
+  body { background: var(--bg); color: var(--ink); }
+  .hero h1 { letter-spacing: -.045em; }
+  .project h2::before { content: ""; display: inline-block; width: .42em; height: .42em; border-radius: 50%; background: var(--dot); margin-right: .25em; vertical-align: .18em; }
+  .skills li { background: var(--surface) !important; border-color: var(--line) !important; border-radius: 999px !important; color: var(--ink); }
+  .comp-stage { border-radius: 24px; padding: 36px 13% 7% 36px !important; }
+  .comp-stage .phone { right: 36px !important; bottom: 36px !important; }
+  .bonus .comp-stage { padding: 36px !important; }
+  .browser { border-radius: 14px !important; }
+
+  /* Cálido */
+  :root[data-theme="light"] .role { color: #8a5a2b !important; }
+  :root[data-theme="light"] .index ol { background: var(--surface); border: 1px solid var(--line) !important; border-radius: 18px; padding: 6px 18px; }
+  :root[data-theme="light"] .index a { border-bottom-color: var(--line) !important; }
+  :root[data-theme="light"] .index li:last-child a { border-bottom: 0; }
+  :root[data-theme="light"] .summary { border: 0 !important; gap: 12px !important; }
+  :root[data-theme="light"] .summary div { background: var(--surface) !important; border: 1px solid var(--line) !important; border-radius: 16px !important; padding: 18px !important; }
+  :root[data-theme="light"] .comp-stage { background: color-mix(in srgb, var(--dot) 14%, var(--bg)); }
+  :root[data-theme="light"] .browser { box-shadow: 0 30px 60px -30px rgb(60 40 20 / .45) !important; }
+  :root[data-theme="light"] .project { border-top: 0 !important; }
+
+  /* Oscuro */
+  :root[data-theme="dark"] .hero h1 { background: linear-gradient(180deg, #fff, #b9b6ae); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  :root[data-theme="dark"] .chip { border-color: var(--dot) !important; color: var(--dot) !important; }
+  :root[data-theme="dark"] .comp-stage { background: radial-gradient(800px 400px at 30% 20%, color-mix(in srgb, var(--dot) 22%, transparent), transparent 70%); border: 1px solid var(--line); }
+  :root[data-theme="dark"] .browser { border-color: var(--line) !important; box-shadow: 0 40px 80px -30px rgb(0 0 0 / .8) !important; }
+  :root[data-theme="dark"] .contact a, :root[data-theme="dark"] .links a { color: var(--ink); }
+
+  /* Selector de tema */
+  .side-theme { display: flex; gap: 4px; margin-top: 8px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; width: fit-content; }
+  .side-theme button { font: 500 12.5px var(--f-body); color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+  .side-theme button:hover { color: var(--ink); }
+  .side-theme button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .t-en { display: none; }
+  :root[data-lang="en"] .t-es { display: none; }
+  :root[data-lang="en"] .t-en { display: inline; }
+}
 </style>
 </head>
 <body>
-<div class="lang-block" data-l="es" lang="es"><nav class="side" aria-label="Proyectos"><p class="label">Facundo Lapente</p><div class="side-lang" role="group" aria-label="Idioma"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><ol><li><a href="#arcano-es">Arcano Record Store</a></li><li><a href="#stock-es">Arcano · Stock y gestión</a></li><li><a href="#house-mates-es">House Mates · Panel</a></li><li><a href="#second-brain-es">Second Brain</a></li><li><a href="#landing-es">Landing para una gastroenteróloga</a></li></ol></nav>
+<div class="lang-block" data-l="es" lang="es"><nav class="side" aria-label="Proyectos"><p class="label">Facundo Lapente</p><div class="side-lang" role="group" aria-label="Idioma"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><div class="side-theme" role="group" aria-label="Tema"><button type="button" data-theme-btn="light">Cálido</button><button type="button" data-theme-btn="dark">Oscuro</button></div><ol><li><a href="#arcano-es">Arcano Record Store</a></li><li><a href="#stock-es">Arcano · Stock y gestión</a></li><li><a href="#house-mates-es">House Mates · Panel</a></li><li><a href="#second-brain-es">Second Brain</a></li><li><a href="#landing-es">Landing para una gastroenteróloga</a></li></ol></nav>
 <header class="hero wrap">
 <div class="row-between"><span class="label">Portafolio · 2026</span><span class="label">Montevideo, Uruguay</span></div>
 <h1>Facundo Lapente</h1><p class="role">Gestión de negocios, producto y desarrollo con inteligencia artificial</p>
@@ -585,7 +635,7 @@ figcaption b { color: var(--ink); font-weight: 650; }
 </div></article>
 <div class="contact wrap"><p class="label">Contacto</p><ul><li><a href="mailto:facundo.lapente@gmail.com">facundo.lapente@gmail.com</a></li><li><a href="https://www.linkedin.com/in/facundo-lapente-91bb49248/" target="_blank" rel="noopener">linkedin.com/in/facundo-lapente ↗</a></li><li>Montevideo, Uruguay</li></ul></div>
 <footer class="foot"><div class="wrap row-between"><span class="mono">Facundo Lapente · Montevideo</span><span class="mono">Capturas tomadas el 13/10/2026</span></div></footer></div>
-<div class="lang-block" data-l="en" lang="en"><nav class="side" aria-label="Projects"><p class="label">Facundo Lapente</p><div class="side-lang" role="group" aria-label="Language"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><ol><li><a href="#arcano-en">Arcano Record Store</a></li><li><a href="#stock-en">Arcano · Inventory and operations</a></li><li><a href="#house-mates-en">House Mates · Panel</a></li><li><a href="#second-brain-en">Second Brain</a></li><li><a href="#landing-en">Landing page for a gastroenterologist</a></li></ol></nav>
+<div class="lang-block" data-l="en" lang="en"><nav class="side" aria-label="Projects"><p class="label">Facundo Lapente</p><div class="side-lang" role="group" aria-label="Language"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><div class="side-theme" role="group" aria-label="Theme"><button type="button" data-theme-btn="light">Warm</button><button type="button" data-theme-btn="dark">Dark</button></div><ol><li><a href="#arcano-en">Arcano Record Store</a></li><li><a href="#stock-en">Arcano · Inventory and operations</a></li><li><a href="#house-mates-en">House Mates · Panel</a></li><li><a href="#second-brain-en">Second Brain</a></li><li><a href="#landing-en">Landing page for a gastroenterologist</a></li></ol></nav>
 <header class="hero wrap">
 <div class="row-between"><span class="label">Portfolio · 2026</span><span class="label">Montevideo, Uruguay</span></div>
 <h1>Facundo Lapente</h1><p class="role">Business management, product and AI-assisted development</p>
@@ -693,7 +743,7 @@ figcaption b { color: var(--ink); font-weight: 650; }
 <div class="contact wrap"><p class="label">Contact</p><ul><li><a href="mailto:facundo.lapente@gmail.com">facundo.lapente@gmail.com</a></li><li><a href="https://www.linkedin.com/in/facundo-lapente-91bb49248/" target="_blank" rel="noopener">linkedin.com/in/facundo-lapente ↗</a></li><li>Montevideo, Uruguay</li></ul></div>
 <footer class="foot"><div class="wrap row-between"><span class="mono">Facundo Lapente · Montevideo</span><span class="mono">Screenshots taken on 10/13/2026</span></div></footer></div>
 <div class="controls" role="group" aria-label="Opciones" data-uncommentable>
-  <div class="seg" id="lang-seg"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div>
+  <div class="seg" id="lang-seg"><button type="button" data-lang="es">Español</button><button type="button" data-lang="en">English</button></div><div class="seg" id="theme-seg"><button type="button" data-theme-btn="light"><span class="t-es">Cálido</span><span class="t-en">Warm</span></button><button type="button" data-theme-btn="dark"><span class="t-es">Oscuro</span><span class="t-en">Dark</span></button></div>
 </div>
 <p class="toast" id="toast" role="status" aria-live="polite" hidden data-uncommentable></p>
 <div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Captura ampliada" data-uncommentable>
@@ -757,5 +807,17 @@ const UI = {"es": {"prev": "← Anterior", "next": "Siguiente →", "close": "Ce
 })();
 
 </script>
+<script>
+(() => {
+  const r = document.documentElement;
+  const mark = () => document.querySelectorAll("[data-theme-btn]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.themeBtn === r.dataset.theme)));
+  document.querySelectorAll("[data-theme-btn]").forEach((b) => b.addEventListener("click", () => {
+    r.dataset.theme = b.dataset.themeBtn; try { localStorage.setItem("pf-theme", r.dataset.theme); } catch (_) {}
+    mark();
+  }));
+  mark();
+})();
+</script>
+
 </body>
 </html>
